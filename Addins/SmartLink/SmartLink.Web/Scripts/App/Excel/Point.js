@@ -1,78 +1,21 @@
 ﻿$(function () {
-	Office.initialize = function (reason)
-	{
-		var isInIframe = function ()
-		{
-			try 
-			{
-				return window.self !== window.top;
-			}
-			catch (e)
-			{
-				return true;
-			}
-		};
+    Office.initialize = function (reason) {
 
         $(document).ready(function () {
-			if (isInIframe())
-			{
-				microsoftTeams.initialize();
 
-				microsoftTeams.authentication.authenticate({
-					url: '/auth',
-					width: 600,
-					height: 535,
-					successCallback: function (result)
-					{
-						point.init(result.idToken);
-						$("#dvLogin").hide();
-						$("#excel-addin").show();
+            let token = sessionStorage["token"];
 
-					},
-					failureCallback: function (err)
-					{
-						console.log(err);
-					}
-				});
-			}
-			else
-			{
-				var authenticationContext = new AuthenticationContext(config);
+            if (!token)
+                window.location.replace("/");
 
-				// Check For & Handle Redirect From AAD After Login
-				if (authenticationContext.isCallback(window.location.hash))
-				{
-					authenticationContext.handleWindowCallback();
-				}
-				else 
-				{
-					var user = authenticationContext.getCachedUser();
-					if (user && window.parent === window && !window.opener)
-					{
+            point.init(token);
+            $("#dvLogin").hide();
+            $("#excel-addin").show();
 
-						authenticationContext.acquireToken(config.clientId,
-							function (errorDesc, token, error)
-							{
-								if (error)
-								{
-									authenticationContext.acquireTokenRedirect(config.clientId, null, null);
-								}
-								else
-								{
-									point.init(token);
-									$("#dvLogin").hide();
-									$("#excel-addin").show();
-								}
-							});
-					}
-					else
-					{
-						authenticationContext.login();
-					}
-				}
-			}
-		});
-	}
+
+        });
+
+    };
 });
 
 var point = (function () {

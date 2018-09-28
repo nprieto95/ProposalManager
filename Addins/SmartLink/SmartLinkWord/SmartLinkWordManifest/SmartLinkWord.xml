@@ -17,7 +17,7 @@
     <Host Name="Document" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="~remoteAppUrl/Home/Index" />
+    <SourceLocation DefaultValue="~remoteAppUrl/" />
 	</DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>

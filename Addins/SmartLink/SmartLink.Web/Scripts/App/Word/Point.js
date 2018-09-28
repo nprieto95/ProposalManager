@@ -1,79 +1,23 @@
 ﻿$(function ()
 {
     Office.initialize = function (reason) {
-        var isInIframe = function ()
-        {
-            try 
-            {
-                return window.self !== window.top;
-            }
-            catch(e)
-            {
-                return true;
-            }
-        };
 
-		$(document).ready(function () 
-		{
+        $(document).ready(function () {
             BigNumber.config({ EXPONENTIAL_AT: 1e+9 });
 
-			if (isInIframe())
-            {
-                microsoftTeams.initialize();
+            let token = sessionStorage["token"];
 
-                microsoftTeams.authentication.authenticate({
-                    url: '/auth',
-                    width: 600,
-                    height: 535,
-                    successCallback: function (result) {
-						point.init(result.idToken);
-						$("#dvLogin").hide();
-						$("#word-addin").show();
-						
-                    },
-                    failureCallback: function (err) {
-                        console.log(err);
-                    }
-                });
-            }
-            else
-			{
-                var authenticationContext = new AuthenticationContext(config);
+            if (!token)
+                window.location.replace("/");
 
-                // Check For & Handle Redirect From AAD After Login
-                if (authenticationContext.isCallback(window.location.hash)) {
-                    authenticationContext.handleWindowCallback();
-                }
-                else 
-                {
-                    var user = authenticationContext.getCachedUser();
-                    if (user && window.parent === window && !window.opener)
-                    {
+            point.init(token);
+            $("#dvLogin").hide();
+            $("#word-addin").show();
 
-                        authenticationContext.acquireToken(config.clientId, 
-                        function (errorDesc, token, error)
-                        {
-                            if (error)
-							{
-								console.log("AzureAD error:", error, errorDesc);
-                                authenticationContext.acquireTokenRedirect(config.clientId, null, null);
-                            }
-                            else
-                            {
-                                point.init(token);
-                                $("#dvLogin").hide();
-                                $("#word-addin").show();
-                            }
-                        });
-                    }
-                    else
-                    {
-                        authenticationContext.login();
-                    }
-                }
-            }
-		});
-    }
+
+        });
+
+    };
 });
 
 var point = (function () {

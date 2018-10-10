@@ -10,7 +10,7 @@ The Proposal Manager solution leverages the collaborative capabilities of Micros
 
 # Before you start
 Make sure that you have the following handy before starting the deployment process:
-  - Admin access on an Office 365 (E3 recommended) tenant to register the app and manage content in SharePoint
+  - Admin access on an Office 365 tenant to register the app and manage content in SharePoint
   - Owner access on an Azure Subscription to provision the web app
 
 # Getting Started

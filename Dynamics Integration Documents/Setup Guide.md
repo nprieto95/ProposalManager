@@ -25,6 +25,7 @@ The professional performing the setup needs to have appropriate administrative p
 2. Install (import) the Proposal Manager solution (available in this repo) in the Dynamics 365 organization. For instructions on how to work with solutions in Dynamics 365 Customer Engagement, check [this doc](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/customize/import-update-export-solutions).
 3. Create a user for the Proposal Manager application in the Dynamics 365 organization. For information on how to do that, please check [this doc](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/developer/use-multi-tenant-server-server-authentication#manually-create-a--application-user)
 4. Create the appropriate SharePoint sites and locations in the Dynamics 365 organization. To do this, you need Document Management to be enabled for your organization. If it's not (or if you don't know), follow these [steps](https://docs.microsoft.com/en-us/dynamics365/customer-engagement/admin/set-up-dynamics-365-online-to-use-sharepoint-online#configure-a-new-organization). Then, create the following sites and locations:
+
    Type|Name|Parent|Absolute URL|Relative URL
    ----|----|------|------------|------------
    Site|Default Site|-|**Tenant SharePoint site URL**|-
@@ -33,6 +34,7 @@ The professional performing the setup needs to have appropriate administrative p
    Location|Proposal Manager Temporary Folder|Proposal Manager Site Drive|-|`TempFolder`
 5. Go to the `appsettings.json` file, in the _WebReact_ project, and fill the following keys with the specified values:
    1. In the `Dynamics365` section:
+   
       Key|Value
       ---|-----
       `ClientId`|**Proposal Manager's client id**
@@ -43,6 +45,7 @@ The professional performing the setup needs to have appropriate administrative p
       `TemporaryFolder`|Leave the default value: `TempFolder`
       `OpportunityMapping`|More documentation on this topic is coming. For the moment, the settings that ship with the solution will satisfy most of your needs.
    2. In the `OneDrive` section:
+   
       Key|Value
       ---|-----
       `WebhookSecret`|An arbitrary security string. You need to come up with some secret and you write it here. That's it.
@@ -51,6 +54,7 @@ The professional performing the setup needs to have appropriate administrative p
       `RootTempFolderName`|Leave the default value: `/TempFolder`
       `AttachmentCallbackUrl`|**Proposal Manager API url** + `dynamics/Attachment`
    3. In the `ProposalManager` section:
+   
       Key|Value
       ---|-----
       `AppUrl`|**Proposal Manager application url**
@@ -59,6 +63,7 @@ The professional performing the setup needs to have appropriate administrative p
       `CreatorRole:AdGroupName`|**Name of the Azure AD group that corresponds to the Proposal Manager role that creates opportunities**
       `CreatorRole:DisplayName`|**Name of the Proposal Manager role that creates opportunities**
    4. In the `WebHooks:DynamicsCrm:SecretKey` section:
+   
       Key|Value
       ---|-----
       `opportunity`|An arbitrary security string. You need to come up with some secret and you write it here.

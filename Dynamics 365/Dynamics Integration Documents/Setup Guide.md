@@ -12,13 +12,7 @@ The professional performing the setup needs to have appropriate administrative p
    1. The data we need to retrieve about the Dynamics 365 organization are:
       * The **organization's web API url**.
    2. The data we need to retrieve about the Proposal Manager instance are:
-      * The **Proposal Manager's client id**
-      * The **Proposal Manager's client secret**
-      * The **Proposal Manager SharePoint site url**.
-      * The **Proposal Manager SharePoint site id**.
       * The **name of the Proposal Manager SharePoint site root drive**. This is usually `Shared Documents`, but can vary depending on the tenant and the site.
-      * The **Proposal Manager application url**.
-      * The **Proposal Manager API url**.
       * The **group id of the Proposal Manager role that creates opportunities** (generally, this is the Relationship Managers group, but it depends on the Proposal Manager configuration).
       * The **name of the Azure AD group that corresponds to the Proposal Manager role that creates opportunities**.
       * The **name of the Proposal Manager role that creates opportunities**.
@@ -37,28 +31,20 @@ The professional performing the setup needs to have appropriate administrative p
    
       Key|Value
       ---|-----
-      `ClientId`|**Proposal Manager's client id**
-      `ClientSecret`|**Proposal Manager's client secret**
       `OrganizationUri`|**Organization's web API url**
-      `ProposalManagerSite`|**Proposal Manager SharePoint site url** (only the protocol and domain name)
       `RootDrive`|**Name of the Proposal Manager SharePoint site root drive**
-      `TemporaryFolder`|Leave the default value: `TempFolder`
       `OpportunityMapping`|More documentation on this topic is coming. For the moment, the settings that ship with the solution will satisfy most of your needs.
    2. In the `OneDrive` section:
    
       Key|Value
       ---|-----
       `WebhookSecret`|An arbitrary security string. You need to come up with some secret and you write it here. That's it.
-      `FormalProposalCallbackUrl`|**Proposal Manager API url** + `dynamics/FormalProposal`
-      `ProposalManagerBaseSiteId`|**Proposal Manager SharePoint site id**
-      `RootTempFolderName`|Leave the default value: `/TempFolder`
-      `AttachmentCallbackUrl`|**Proposal Manager API url** + `dynamics/Attachment`
+      `FormalProposalCallbackUrl`|Leave the default: `/api/dynamics/FormalProposal`
+      `AttachmentCallbackUrl`|Leave the default: `/api/dynamics/Attachment`
    3. In the `ProposalManager` section:
    
       Key|Value
       ---|-----
-      `AppUrl`|**Proposal Manager application url**
-      `ApiUrl`|**Proposal Manager API url** (this is the **Proposal Manager application url** + `/api`)
       `CreatorRole:Id`|**Group id of the Proposal Manager role that creates opportunities**
       `CreatorRole:AdGroupName`|**Name of the Azure AD group that corresponds to the Proposal Manager role that creates opportunities**
       `CreatorRole:DisplayName`|**Name of the Proposal Manager role that creates opportunities**
